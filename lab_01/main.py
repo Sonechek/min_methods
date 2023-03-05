@@ -7,3 +7,4 @@ eps = math.pow(10, -6)
 
 
 functions.grafik(a, b)
+functions.kas(a, b, eps)

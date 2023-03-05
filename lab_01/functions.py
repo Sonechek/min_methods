@@ -1,22 +1,22 @@
 import random
 from matplotlib import pyplot as plt
 import sympy as sp
+import math
 
 
 def f(x):
     return 2 + sp.Pow(x, 2) + sp.Pow(x, 2 / 3) - sp.log(1 + sp.Pow(x, 2 / 3)) - 2 * x * sp.atan(sp.Pow(x, 1/3))
-    return sp.Pow(x, 2)
+
+
 def diffed(i):
      x = sp.Symbol('x')
      g = 2 + sp.Pow(x, 2) + sp.Pow(x, 2 / 3) - sp.log(1 + sp.Pow(x, 2 / 3)) - 2 * x * sp.atan(sp.Pow(x, 1 / 3))
-
      g_x = g.diff(x)
-     print(g_x)
+     # print(g_x)
      return g_x
 
 
 def gold(a, b, eps):
-
     acc = 0
     while (abs(a - b) >= eps):
         x1 = a + ((3 - math.sqrt(5) / 2) * (b - a))
@@ -28,7 +28,6 @@ def gold(a, b, eps):
         else:
             b = x2
         acc += 1
-
     print(acc)
     print((a + b) / 2)
     print(f(a + b / 2))
@@ -42,14 +41,14 @@ def kas(a, b, eps):
     # d_b = diffed(b)
     print(f(x_rand))
     print(diffed(x_rand))
-    # while (abs(xn1-x_rand)>=eps):
-    #     # x_min = (f(b) - f(a) + (d_a * a) - (d_b * b)) / (d_a - d_b)
-    #     xn_rand = x_rand - (f(x_rand)/diffed(x_rand))
-    #     # if(diffed(x_min)<0):
-    #     print(x_rand)
-    #     acc += 1
+    while (abs(xn1-x_rand)>=eps):
+        x_min = (f(b) - f(a) + (d_a * a) - (d_b * b)) / (d_a - d_b)
+        xn_rand = x_rand - (f(x_rand)/diffed(x_rand))
+        if(diffed(x_min)<0):
+        print(x_rand)
+        acc += 1
+    print(x_min)
 
-    # print(x_min)
 
 def grafik(a,b):
     x_mas = []
@@ -60,4 +59,4 @@ def grafik(a,b):
         a = a + 0.01
     plt.plot(x_mas, y_mas, color='red')
     plt.show()
-    print(min(y_mas))
+    # print(min(y_mas))
