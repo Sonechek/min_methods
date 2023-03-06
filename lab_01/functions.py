@@ -5,14 +5,19 @@ import math
 
 
 def f(x):
-    return 2 + sp.Pow(x, 2) + sp.Pow(x, 2 / 3) - sp.log(1 + sp.Pow(x, 2 / 3)) - 2 * x * sp.atan(sp.Pow(x, 1/3))
-
+    # temp =math.atan(x)
+    temp = sp.log(1 + x ** (2/3))
+    print(temp)
+    return 2 + x**2 + x ** (2/3) - sp.log(1 + x ** (2/3)) - 2 * x * sp.atan(x ** (1/3))
 
 def diffed(i):
      x = sp.Symbol('x')
-     g = 2 + sp.Pow(x, 2) + sp.Pow(x, 2 / 3) - sp.log(1 + sp.Pow(x, 2 / 3)) - 2 * x * sp.atan(sp.Pow(x, 1 / 3))
+     g = 2 + x**2 + x ** (2/3) - sp.log(1 + x ** (2/3)) - 2 * x * sp.atan(x ** (1/3))
      g_x = g.diff(x)
-     # print(g_x)
+     g_x = str(g_x)
+     g_x = g_x.replace('atan', 'math.atan')
+     g_x = g_x.replace('x', str(i))
+     g_x = eval(g_x)
      return g_x
 
 
@@ -36,18 +41,47 @@ def gold(a, b, eps):
 def kas(a, b, eps):
     acc = 0
     xn1 = 0
-    x_rand = random.uniform(a, b)
-    # d_a = diffed(a)
-    # d_b = diffed(b)
-    print(f(x_rand))
-    print(diffed(x_rand))
-    while (abs(xn1-x_rand)>=eps):
-        x_min = (f(b) - f(a) + (d_a * a) - (d_b * b)) / (d_a - d_b)
-        xn_rand = x_rand - (f(x_rand)/diffed(x_rand))
-        if(diffed(x_min)<0):
-        print(x_rand)
-        acc += 1
+    x_min = (f(b) - f(a) + (diffed(s) * a) - (diffed(b) * b)) / (diffed(a) - diffed(b))
+    x_min = str(x_min).replace('pi', '3.14')
+    x_min = x_min.replace('log', 'math.log')
+    x_min = eval(x_min)
     print(x_min)
+    # temp = temp.replace('x', str(a))
+    # temp = eval(temp)
+    # y_min = f(x_min) + (diffed(x_min) * (x_min - x_min))
+    # while (abs(xn1-x_rand)>=eps):
+    #     xn_rand = x_rand - (f(x_rand)/diffed(x_rand))
+    #     if(diffed(x_min)<0):
+    #         a = x_min
+    #         x_min = xr
+    #     else:
+    #         b = x_min
+    #         x_min = xl
+    #     print(x_rand)
+    #     acc += 1
+    # print(x_min)
+
+
+def newton(a, b, eps):
+    rand_1 = random.randint(1, 2)
+    if (rand_1 == 1):
+        xk = a
+    else:
+        xk = b
+    xkn = 1
+    acc = 0
+    while (abs(xkn - xk) > eps):
+        if acc == 0:
+            xk = xk
+        else:
+            xk = xkn
+        xk_d = diffed(xk)
+        fun_xk = f(xk)
+        xkn = (xk - fun_xk) / xk_d
+        print(xkn)
+        acc += 1
+    print(acc)
+    print(xkn)
 
 
 def grafik(a,b):
