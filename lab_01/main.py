@@ -1,14 +1,12 @@
+import cmath
 import math
-import functions
+import gold
+import newton
 
 a = 0.5
 b = 1
 eps = math.pow(10, -6)
 
-
-# functions.grafik(a, b)
-# functions.kas(a, b, eps)
-# functions.gold(a, b, eps)
-# functions.newton(a, b, eps)
-print(functions.f(-37.2669908535841))
-print(functions.diffed(1))
+gold.gold(a, b, eps)
+gold.grafik(a,b)
+newton.newton(a, eps)
