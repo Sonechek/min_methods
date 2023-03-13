@@ -30,6 +30,22 @@ def gold(a, b, eps):
         else:
             b = x2
         acc += 1
-    print(acc)
-    print((a + b) / 2)
-    print(f(a + b / 2))
+    print("Количество итераций - " + str(acc))
+    print("X min - " + str((a + b) / 2))
+    print("F(X min) - " + str(f((a + b) / 2)))
+
+
+def popolam(a, b, eps):
+    acc = 0
+    d = 10 ** -7
+    while (abs(a-b) >= eps):
+        x1 = (a + b - d) / 2
+        x2 = (a + b + d) / 2
+        if(f(x1) > f(x2)):
+            a = x1
+        else:
+            b = x2
+        acc += 1
+    print("Количество итераций - " + str(acc))
+    print("X min - " + str((a + b) / 2))
+    print("F(X min) - " + str(f((a + b) / 2)))

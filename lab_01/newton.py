@@ -13,13 +13,13 @@ def fsecond(x):
 def newton(x, eps):
     acc = 0
     while True:
-        x1 = x - fprime(x) / fsecond(x)
+        x1 = x - (fprime(x) / fsecond(x))
         t = abs(x1 - x)
         if t < eps:
             break
         x = x1
         acc += 1
-    print(cmath.phase(x))
-    print(cmath.phase(fprime(x)))
-    print(acc)
+    print("Количество итераций - " + str(acc))
+    print("X min - " + str(x1))
+    print("F(X min) - " + str(fprime(x1)))
     return x
