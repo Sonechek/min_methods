@@ -1,13 +1,13 @@
 import math
-import gold
-import newton
+import functions
 
-a = 0.5
-b = 1
+a = 0
+b = 3
 eps = math.pow(10, -6)
 
 
-gold.gold(a, b, eps)
-gold.grafik(a, b)
-gold.popolam(a, b, eps)
-newton.newton(a, eps)
+# functions.gold(a, b, eps)
+# functions.popolam(a, b, eps)
+# functions.newton(b, eps)
+functions.nk(b)
+# functions.grafik(a, b)
