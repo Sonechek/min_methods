@@ -51,6 +51,7 @@ def gradient():
         x2 = x21
 
     print('x1, x2 - ' + str(x1), str(x2))
+    print('F(x1,x2) - ' + str(fprime(x1,x2)))
     print('Количество итераций - ' + str(acc))
 
 
