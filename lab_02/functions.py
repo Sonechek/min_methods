@@ -1,5 +1,5 @@
 import math
-
+import scipy.optimize as opt
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -51,18 +51,21 @@ def gradient():
         x2 = x21
 
     print('x1, x2 - ' + str(x1), str(x2))
-    print('F(x1,x2) - ' + str(fprime(x1,x2)))
+    print('F(x1,x2) - ' + str(fprime(x1, x2)))
     print('Количество итераций - ' + str(acc))
 
 
-def hookjeevs():
-    x1 = 0
-    x2 = 0
-    di1 = 1
-    di2 = 1
-    alpha = 2
-    eps = 10 ** -6
-    acc = 0
-    while True:
-        x1 = fprime(x1 + di1, x2)
-        x2 = fprime(x1, x2 + di2)
+def f(X):
+    return X[0] ** 4 + X[1] ** 4 + math.sqrt(2 + X[0] ** 2 + X[1] ** 2) - 2 * X[0] + 3 * X[1]
+
+
+def neldermead():
+    n = 2
+    x0 = np.zeros(2, dtype=float)
+    x0[0] = 0
+    x0[1] = 0
+    res = opt.minimize(f, x0, method='Nelder-Mead',  options={'xatol': 10**-6})
+    print('х1, х2 - ' + str(res.x))
+    print('F(x1,x2) - ' + str(res.fun))
+    print('Количество итераций - ' + str(res.nit))
+    return res
