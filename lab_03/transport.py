@@ -105,7 +105,7 @@ def sev_zap(a_, b_, c_):
 
 
 # Для метода потенциалов
-def delta(a, b, c, x):
+def delta(a, b, c, x, N=None):
     # Проверяем условие замкнутости:
     if a.sum() > b.sum():
         b = np.hstack((b, [a.sum() - b.sum()]))
